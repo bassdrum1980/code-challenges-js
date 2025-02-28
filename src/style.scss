@@ -10,6 +10,10 @@
   background-color: #08151c;
 }
 
+body {
+  padding: 2rem;
+}
+
 pre {
   padding: 1rem;
   border-radius: 0.25rem;
@@ -24,6 +28,16 @@ code {
   border: 1px solid #3e6072;
   border-radius: 0.25rem;
   white-space: pre;
+}
+
+.challenge__output {
+  li {
+    list-style-type: none;
+  }
+
+  .icon {
+    margin-right: 0.5rem;
+  }
 }
 
 @media (prefers-color-scheme: light) {
