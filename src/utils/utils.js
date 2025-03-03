@@ -8,9 +8,10 @@ hljs.registerLanguage("javascript", javascript);
 function renderChallenge(challenge, solution, callback) {
   window.addEventListener("DOMContentLoaded", () => {
     const descriptionElem = document.querySelector(".challenge__description");
-    const testCasesElem = document.querySelector(".challenge__test-cases");
-    const solutionElem = document.querySelector(".challenge__solution > pre");
-    const outputElem = document.querySelector(".challenge__output");
+    const solutionElem = document.querySelector(
+      ".challenge__solution__code > pre"
+    );
+    const outputElem = document.querySelector(".challenge__solution__output");
 
     // print description
     const title = `<h1>${challenge.title}</h1>`;
@@ -18,18 +19,6 @@ function renderChallenge(challenge, solution, callback) {
       .map((p) => `<p>${p}</p>`)
       .join("");
     descriptionElem.innerHTML = `${title}${description}`;
-
-    // print test cases
-    testCasesElem.innerHTML += `
-      <ul>
-        ${Object.keys(challenge.testCases)
-          .map(
-            (key) =>
-              `<li>Input: ${key} => Output: ${challenge.testCases[key]}</li>`
-          )
-          .join("")}
-      </ul>
-    `;
 
     // print function
     solutionElem.textContent = solution.toString();
@@ -39,13 +28,14 @@ function renderChallenge(challenge, solution, callback) {
     Object.keys(challenge.testCases).forEach((key) => {
       const result = callback(key);
       const li = document.createElement("li");
-      li.textContent = `Input: ${key} => Output: ${result}`;
+      li.textContent = `${key} => ${result}`;
       if (result === challenge.testCases[key]) {
-        li.style.color = "lime";
+        li.classList.add = "correct";
+        li.insertAdjacentHTML("afterbegin", '<span class="icon">✅</span>');
       } else {
-        li.style.color = "red";
+        li.classList.add = "incorrect";
+        li.insertAdjacentHTML("afterbegin", '<span class="icon">❌</span>');
       }
-      li.insertAdjacentHTML("afterbegin", '<span class="icon">✅</span>');
       outputElem.appendChild(li);
     });
   });

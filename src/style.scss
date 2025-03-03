@@ -30,13 +30,25 @@ code {
   white-space: pre;
 }
 
-.challenge__output {
+.challenge__solution {
+  display: flex;
+  column-gap: 2rem;
+
+  & > div:first-child {
+    flex-basis: 70%;
+  }
+}
+
+.challenge__solution__output {
   li {
+    line-height: 1.75rem;
     list-style-type: none;
+    font-size: 0.85rem;
   }
 
   .icon {
     margin-right: 0.5rem;
+    font-size: 0.7rem;
   }
 }
 
