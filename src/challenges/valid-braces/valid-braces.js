@@ -8,6 +8,7 @@ const challenge = {
     "All input strings will be nonempty, and will only consist of parentheses, brackets and curly braces: <code>()[]{}.</code>",
     "A string of braces is considered valid if all braces are matched with the correct brace.",
   ],
+  tags: ["Strings", "Validation", "Braces"],
   testCases: {
     "())(": false,
     "()": true,
