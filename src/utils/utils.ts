@@ -37,12 +37,12 @@ function renderChallenge(
     Object.keys(challenge.testCases).forEach((key) => {
       // in some cases we need to manipulate the key before passing it to the solution function
       const result = mapInput ? mapInput(key) : solution(key);
+
+      // create a list item for each test case
       const li = document.createElement("li");
       li.textContent = `${key} => ${result}`;
 
-      console.log("result - ", result);
-      console.log("challenge - ", challenge.testCases[key]);
-
+      // compare the result with the expected output
       if (
         // and sometimes we need a custom comparison function
         compareResult
