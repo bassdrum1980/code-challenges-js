@@ -1,17 +1,25 @@
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
+import { Challenge } from "../types/types";
 
-// TODO: migrate to typescript
 // code syntax highlighting
 hljs.registerLanguage("javascript", javascript);
 
-function renderChallenge(challenge, solution, callback) {
+function renderChallenge(
+  challenge: Challenge,
+  solution: Function,
+  callback?: (key: string) => void
+) {
   window.addEventListener("DOMContentLoaded", () => {
-    const descriptionElem = document.querySelector(".challenge__description");
+    const descriptionElem = document.querySelector(
+      ".challenge__description"
+    ) as HTMLElement;
     const solutionElem = document.querySelector(
       ".challenge__solution__code > pre"
-    );
-    const outputElem = document.querySelector(".challenge__solution__output");
+    ) as HTMLElement;
+    const outputElem = document.querySelector(
+      ".challenge__solution__output"
+    ) as HTMLElement;
 
     // print description
     const title = `<h1>${challenge.title}</h1>`;
@@ -26,14 +34,14 @@ function renderChallenge(challenge, solution, callback) {
 
     // run test cases and print the output
     Object.keys(challenge.testCases).forEach((key) => {
-      const result = callback(key);
+      const result = callback ? callback(key) : solution(key);
       const li = document.createElement("li");
       li.textContent = `${key} => ${result}`;
       if (result === challenge.testCases[key]) {
-        li.classList.add = "correct";
+        li.classList.add("--correct");
         li.insertAdjacentHTML("afterbegin", '<span class="icon">✅</span>');
       } else {
-        li.classList.add = "incorrect";
+        li.classList.add("--incorrect");
         li.insertAdjacentHTML("afterbegin", '<span class="icon">❌</span>');
       }
       outputElem.appendChild(li);
