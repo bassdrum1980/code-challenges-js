@@ -34,7 +34,7 @@ const challenge = {
 };
 
 // Solution
-function solution(str) {
+function solution(str: string): boolean {
   // the idea is to use a stack to keep track of the open braces
   // if we find a closing brace, we pop the last element from the stack
   // if the last element is the corresponding open brace, we pop it
@@ -66,4 +66,4 @@ function solution(str) {
 }
 
 // Render the challenge 🚀
-renderChallenge(challenge, solution, (key) => solution(key));
+renderChallenge(challenge, solution);
